@@ -6,6 +6,13 @@ const room = document.querySelector('#room');
 
 room.hidden = true;
 let roomName;
+
+function addMessage(msg) {
+  const ul = room.querySelector('ul');
+  const li = document.createElement('li');
+  li.innerText = msg;
+  ul.appendChild(li);
+}
 function handleSubmitRoom(event) {
   event.preventDefault();
   const input = form.querySelector('input');
@@ -20,3 +27,7 @@ function handleSubmitRoom(event) {
 }
 
 form.addEventListener('submit', handleSubmitRoom);
+
+socket.on('welcome', () => {
+  addMessage('Someone joined!');
+});
